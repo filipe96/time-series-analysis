@@ -1,3 +1,10 @@
+from data_objects.Report import Report
+
+
+def create_report(machine_one, machine_two):
+    calculated_similarity = compare_time_series(machine_one.machine_data, machine_two.machine_data)
+    return Report(machine_one, machine_two, calculated_similarity)
+
 def calculate_similarity(first_array, second_array):
     number_of_similar_fields = 0
 

@@ -7,3 +7,6 @@ class Machine:
     def get_machine_data(self):
         return self.machine_data
 
+    def get_machine_name(self):
+        return self.machine_name
+
