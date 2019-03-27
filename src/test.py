@@ -1,7 +1,6 @@
 import unittest
-from data_objects.Machine import Machine
-from data_objects.Report import Report
-from timeDisplaced import *
+from src.data_objects.Machine import Machine
+from src.timeDisplaced import *
 
 class MyFirstTests(unittest.TestCase):
 
