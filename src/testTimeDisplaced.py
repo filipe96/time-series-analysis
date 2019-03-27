@@ -58,5 +58,3 @@ class MyFirstTests(unittest.TestCase):
 
         self.assertEqual(created_report.first_machine.machine_name, expected_report.first_machine.machine_name)
         self.assertEqual(created_report.calculated_similarity, expected_report.calculated_similarity)
-
-    #def test_create_report_with_both_directions(self):
