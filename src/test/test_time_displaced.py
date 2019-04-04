@@ -14,13 +14,13 @@ class Test_time_displaced(unittest.TestCase):
 
         machine_two = Machine(machine_two_name, machine_two_data)
 
-        self.assertEqual(calculate_similarity(machine_one.get_machine_data(), machine_two.get_machine_data()), 100)
+        self.assertEqual(calculate_similarity(machine_one.get_machine_data(), machine_two.get_machine_data(), 0), 100)
 
     def test_calculate_similarity_with_100_not_equal_data_set(self):
         machine_one = [0, 0, 0, 1, 0, 0, 0, 1]
         machine_two = [0, 0, 1, 0, 0, 0, 1, 0]
 
-        self.assertEqual(calculate_similarity(machine_one, machine_two), 50)
+        self.assertEqual(calculate_similarity(machine_one, machine_two, 0), 50)
 
     def test_manipulate_range_of_array(self):
         machine_one = [0, 0, 0, 1, 0, 0, 0, 1, 0, 1]
@@ -59,5 +59,17 @@ class Test_time_displaced(unittest.TestCase):
         self.assertEqual(created_report.first_machine.machine_name, expected_report.first_machine.machine_name)
         self.assertEqual(created_report.calculated_similarity, expected_report.calculated_similarity)
 
+    def test_compare_to_machines_with_given_ofset(self):
+        machine_one_data = [0, 0, 1]
+        machine_one_name = "DB02"
+        machine_two_data = [1, 0, 0]
+        machine_two_name = "DB03"
+
+        machine_one = Machine(machine_one_name, machine_one_data)
+        machine_two = Machine(machine_two_name, machine_two_data)
+
+        self.assertEqual(calculate_similarity(machine_one.machine_data, machine_two.machine_data, 0), 33.33333333333333)
+        self.assertEqual(calculate_similarity(machine_one.machine_data, machine_two.machine_data, 1), 0)
+        self.assertEqual(calculate_similarity(machine_one.machine_data, machine_two.machine_data, 2), 100)
 if __name__ == '__main__':
         unittest.main()
