@@ -71,5 +71,6 @@ class Test_time_displaced(unittest.TestCase):
         self.assertEqual(calculate_similarity(machine_one.machine_data, machine_two.machine_data, 0), 33.33333333333333)
         self.assertEqual(calculate_similarity(machine_one.machine_data, machine_two.machine_data, 1), 0)
         self.assertEqual(calculate_similarity(machine_one.machine_data, machine_two.machine_data, 2), 100)
+
 if __name__ == '__main__':
         unittest.main()

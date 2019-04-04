@@ -1,5 +1,5 @@
 from src.data_objects.Report import Report
-
+from tqdm import tqdm
 
 def create_report(machine_one, machine_two):
     calculated_similarity = compare_time_series(machine_one.machine_data, machine_two.machine_data)
@@ -18,7 +18,7 @@ def cut_away_fields_outside_of_timezone(status_time_line, factor):
 def compare_time_series(first_status_time_line, second_status_time_line):
     report = []
 
-    for i in range(len(first_status_time_line)):
+    for i in tqdm(range(len(first_status_time_line))):
         report.append(calculate_similarity(first_status_time_line, second_status_time_line, i))
 
     return report
