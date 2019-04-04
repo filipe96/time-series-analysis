@@ -1,8 +1,8 @@
 import unittest
 from src.data_objects.Machine import Machine
-from src.timeDisplaced import *
+from src.time_displaced import *
 
-class MyFirstTests(unittest.TestCase):
+class Test_time_displaced(unittest.TestCase):
 
     def test_calculate_similarity_with_100_equal_data_set(self):
         machine_one_data = [0, 0, 0, 1, 0, 0, 0, 1]
@@ -58,3 +58,6 @@ class MyFirstTests(unittest.TestCase):
 
         self.assertEqual(created_report.first_machine.machine_name, expected_report.first_machine.machine_name)
         self.assertEqual(created_report.calculated_similarity, expected_report.calculated_similarity)
+
+if __name__ == '__main__':
+        unittest.main()

@@ -1,14 +1,10 @@
 import pandas as pd
 
-file_path = "data/a_ereignis_02.csv"
-delimiter = "|"
-machine_name = "BFD1ERF1"
 
-
-def get_machine_time_series_data():
+def get_machine_time_series_data(file_path, delimiter, machine_name):
     data = read_file(file_path, delimiter)
     filtered_data_frame = filter_data_frame(data, machine_name)
-    return build_time_series_list(filtered_data_frame)
+    return transform_to_list(build_time_series_list(filtered_data_frame))
 
 
 def read_file(file, delim):
@@ -41,7 +37,7 @@ def initialize_empty_dictionary():
 
 
 def fill_up_dictionary(filtered_data_frame, dictionary):
-    for index, row in filtered_data_frame().iterrows():
+    for index, row in filtered_data_frame.iterrows():
         for x in range(row['StartTime'], row['FinishTime'] + 1, 1):
             dictionary[x] = 1
     return dictionary
