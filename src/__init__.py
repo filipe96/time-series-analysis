@@ -32,8 +32,8 @@ from time_displaced import compare_time_series
 def main():
     #time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP01")
     #time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP02")
-    time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFL2ETI1")
     time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFL2AP01")
+    time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFL2ETI1")
 
     report = compare_time_series(time_series_first_machine, time_series_second_machine)
     print(report)
