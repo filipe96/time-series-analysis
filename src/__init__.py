@@ -1,8 +1,11 @@
+from data_objects.Machine import Machine
 from src.data_extractor import get_machine_time_series_data
 import matplotlib.pyplot as plt
 
-from time_displaced import compare_time_series
-#['BFD1ERF1' 'BFD1FUE1' 'BFD1AR01' 'BFL3KW01' 'BFO4FUE1' 'BFL6AP01'
+from time_displaced import *
+
+
+# ['BFD1ERF1' 'BFD1FUE1' 'BFD1AR01' 'BFL3KW01' 'BFO4FUE1' 'BFL6AP01'
 # 'BFL6KW01' 'BFO4EL41' 'BFO4BL41' 'WFL1KW01' 'BFL6EP01' 'BFL2INS1'
 # 'WFL1RM01' 'BFL3ETI1' 'BFO4EL01' 'BFO4EP01' 'BFL6EK01' 'BFL2FUE1'
 # 'BFL6ETI3' 'BFL6RM01' 'BFO4ETI1' 'BFO4KT02' 'BFL3EK02' 'BFL3FUE1'
@@ -30,13 +33,16 @@ from time_displaced import compare_time_series
 # 'BFO4SOR1' 'BFO4LGK2' 'BFL5FB01' 'BFL3SOR3']
 
 def main():
-    #time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP01")
-    #time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP02")
-    time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFL2AP01")
-    time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFL2ETI1")
+    # time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP01")
+    # time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP02")
+    time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP01")
+    machine_one = Machine("BFO4AP01", time_series_first_machine)
+    time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP02")
+    machine_two = Machine("BFO4AP02", time_series_second_machine)
 
-    report = compare_time_series(time_series_first_machine, time_series_second_machine)
-    print(report)
+    report = create_report(machine_one.machine_data, machine_two.machine_data, 1000, 5000)
+    print(report.calculated_similarity)
+
 
 if __name__ == '__main__':
     main()
