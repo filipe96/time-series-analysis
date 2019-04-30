@@ -17,7 +17,7 @@ def filter_data_frame(df, machine_name):
     table.columns = ['MashineID', 'StartTime', 'FinishTime', 'Date', 'MashineState']
     table = table[['MashineID', 'StartTime', 'FinishTime', 'Date', 'MashineState']]
     table = table[table['MashineID'] == machine_name]
-    table = table[table['Date'] == '08/09/2013']
+    table = table[table['Date'] == '08/09/2013']   # TODO
     table = table[table['MashineState'] == 2]
     return table.sort_values(by=['StartTime'])
 

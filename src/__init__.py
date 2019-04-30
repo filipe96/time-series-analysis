@@ -1,7 +1,7 @@
 from data_objects.Machine import Machine
 from src.data_extractor import get_machine_time_series_data
 import matplotlib.pyplot as plt
-
+import numpy as nu
 from time_displaced import *
 
 
@@ -35,13 +35,36 @@ from time_displaced import *
 def main():
     # time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP01")
     # time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP02")
-    time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP01")
-    machine_one = Machine("BFO4AP01", time_series_first_machine)
-    time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP02")
-    machine_two = Machine("BFO4AP02", time_series_second_machine)
+    machine_name_one = 'BFL2ETI1'
+    machine_name_two = 'BFL2ETI2'
+    starting_point: int = 0
+    window_size = 6000
 
-    report = create_report(machine_one.machine_data, machine_two.machine_data, 1000, 5000)
+    time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", machine_name_one)
+    time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", machine_name_two)
+    machine_one = Machine(machine_name_one, time_series_first_machine)
+    machine_two = Machine(machine_name_two, time_series_second_machine)
+
+    report = create_report(machine_one.machine_data, machine_two.machine_data, starting_point, window_size)  # 10000
     print(report.calculated_similarity)
+    print(max(report.calculated_similarity))
+    t = nu.arange(0.0, len(report.calculated_similarity), 1)
+    plt.plot(t, report.calculated_similarity, )
+    plt.style.use("fast")
+
+    # plt.plot('Item (s)')
+    plt.ylabel('Similarity in percent')
+    plt.xlabel('Displace in Seconds')
+    plt.title(
+        'Main machine: ' + machine_name_one + '\n' +
+        'compared machine: ' + machine_name_two + '\n' +
+        'starting Point: ' + str(starting_point) +
+        '  Window Size: ' + str(window_size)
+    )
+
+    plt.grid(True)
+    plt.ylim(0, 100)
+    plt.show()
 
 
 if __name__ == '__main__':

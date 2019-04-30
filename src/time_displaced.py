@@ -11,13 +11,12 @@ def create_report(machine_one, machine_two, beginning_time, sice_of_time_window)
 
 def calculate_similarity(first_status_time_line, second_status_time_line, displace_in_seconds):
     number_of_similar_fields = 0
-    range_of_compared_fields = len(first_status_time_line)  # - displace_in_seconds
 
-    for i in range(range_of_compared_fields):
+    for i, item in enumerate(first_status_time_line):
         if second_status_time_line[i + displace_in_seconds] == first_status_time_line[i]:
             number_of_similar_fields = number_of_similar_fields + 1
 
-    return (number_of_similar_fields / range_of_compared_fields) * 100
+    return (number_of_similar_fields / len(first_status_time_line)) * 100
 
 
 def create_report_of_given_window(first_status_time_line, second_status_time_line, beginning_time, sice_of_time_window):
