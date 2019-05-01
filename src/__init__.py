@@ -35,10 +35,10 @@ from time_displaced import *
 def main():
     # time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP01")
     # time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP02")
-    machine_name_one = 'BFL2ETI1'
-    machine_name_two = 'BFL2ETI2'
+    machine_name_two = 'BFO4ETI1'
+    machine_name_one = 'BFO4ETI2'
     starting_point: int = 0
-    window_size = 6000
+    window_size = 100
 
     time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", machine_name_one)
     time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", machine_name_two)

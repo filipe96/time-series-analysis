@@ -3,9 +3,9 @@ from src.data_objects.Machine import Machine
 from tqdm import tqdm
 
 
-def create_report(machine_one, machine_two, beginning_time, sice_of_time_window):
+def create_report(machine_one, machine_two, beginning_time, sice_of_time_window, range_of_search):
     calculated_similarity = create_report_of_given_window(machine_one, machine_two,
-                                                          beginning_time, sice_of_time_window)
+                                                          beginning_time, sice_of_time_window, range_of_search)
     return Report(machine_one, machine_two, calculated_similarity)
 
 
@@ -19,10 +19,11 @@ def calculate_similarity(first_status_time_line, second_status_time_line, displa
     return (number_of_similar_fields / len(first_status_time_line)) * 100
 
 
-def create_report_of_given_window(first_status_time_line, second_status_time_line, beginning_time, sice_of_time_window):
-    range_of_comparison = len(second_status_time_line) - (beginning_time + sice_of_time_window)
+def create_report_of_given_window(first_status_time_line, second_status_time_line, beginning_time, sice_of_time_window,
+                                  range_of_search):
+    # range_of_comparison = len(second_status_time_line) - (beginning_time + sice_of_time_window)
     report = []
-    for i in tqdm(range(range_of_comparison)):
+    for i in tqdm(range(range_of_search)):
         report.append(calculate_similarity_of_window(first_status_time_line, second_status_time_line, beginning_time,
                                                      sice_of_time_window, i))
 

@@ -38,7 +38,7 @@ class Test_time_displaced(unittest.TestCase):
                                                             100.0,
                                                             66.66666666666666])
 
-        created_report = create_report(machine_one.machine_data, machine_two.machine_data, 0, 3)
+        created_report = create_report(machine_one.machine_data, machine_two.machine_data, 0, 3, 5)
         self.assertEqual(created_report.calculated_similarity, expected_report.calculated_similarity)
 
     def test_compare_to_machines_with_given_offset(self):
@@ -62,7 +62,7 @@ class Test_time_displaced(unittest.TestCase):
         machine_one = Machine(machine_one_name, machine_one_data)
         machine_two = Machine(machine_two_name, machine_two_data)
 
-        self.assertEqual(create_report_of_given_window(machine_one.machine_data, machine_two.machine_data, 0, 4),
+        self.assertEqual(create_report_of_given_window(machine_one.machine_data, machine_two.machine_data, 0, 4, 4),
                          [25.0, 0.0, 50.0, 100.0])
 
     def test_calculate_similarity_of_window(self):
