@@ -1,4 +1,3 @@
-from data_objects.Machine import Machine
 from src.data_extractor import get_machine_time_series_data
 import matplotlib.pyplot as plt
 import numpy as nu
@@ -37,21 +36,22 @@ def main():
     # time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", "BFO4AP02")
     machine_name_two = 'BFO4ETI1'
     machine_name_one = 'BFO4ETI2'
-    starting_point: int = 0
-    window_size = 100
+    starting_point: int = 2000
+    window_size = 600
+    range_of_search = 84000  # 2000
 
     time_series_first_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", machine_name_one)
     time_series_second_machine = get_machine_time_series_data("../data/a_ereignis_02.csv", "|", machine_name_two)
     machine_one = Machine(machine_name_one, time_series_first_machine)
     machine_two = Machine(machine_name_two, time_series_second_machine)
 
-    report = create_report(machine_one.machine_data, machine_two.machine_data, starting_point, window_size)  # 10000
+    report = create_report(machine_one.machine_data, machine_two.machine_data, starting_point, window_size,
+                           range_of_search)
     print(report.calculated_similarity)
     print(max(report.calculated_similarity))
     t = nu.arange(0.0, len(report.calculated_similarity), 1)
     plt.plot(t, report.calculated_similarity, )
     plt.style.use("fast")
-
     # plt.plot('Item (s)')
     plt.ylabel('Similarity in percent')
     plt.xlabel('Displace in Seconds')
@@ -64,7 +64,14 @@ def main():
 
     plt.grid(True)
     plt.ylim(0, 100)
+    plt.tight_layout()
+    image_name = machine_name_one + machine_name_two + str(starting_point) + str(window_size) + str(range_of_search)
+    plt.savefig(fname=image_name)
     plt.show()
+
+    # plt.figure(41)
+    # plt.hist(report.calculated_similarity, 20)
+    # plt.show()
 
 
 if __name__ == '__main__':
